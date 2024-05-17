@@ -35,10 +35,11 @@ class MyApp extends StatelessWidget {
       ),
       home: Consumer(builder: (context, watch, _) {
         // Check the authentication status here
-        final isAuthenticated = false; // Replace false with your authentication logic
+        final isAuthenticated =
+            false; // Replace false with your authentication logic
 
         // Return either the login screen or the main app based on authentication status
-        return isAuthenticated ?  BusTicketBookingApp() :  LoginScreen();
+        return isAuthenticated ? BusTicketBookingApp() : LoginScreen();
       }),
     );
   }
