@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projek_akhir/bus_ticket_booking_app.dart';
 import 'package:projek_akhir/components/under_part.dart';
 import 'package:projek_akhir/components/upside.dart';
 import 'package:projek_akhir/components/page_title_bar.dart';
@@ -59,20 +60,34 @@ class LoginScreen extends StatelessWidget {
                                   hintText: "Email", icon: Icons.email),
                               const RoundedPasswordField(),
                               switchListTile(),
-                              RoundedButton(text: 'LOGIN', press: () {}),
+                              RoundedButton(
+                                text: 'LOGIN',
+                                press: () {
+                                  // Logika login di sini
+                                  // Misalnya, jika login berhasil, navigasi ke halaman lain
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            BusTicketBookingApp()), // Ganti dengan halaman lain yang ingin ditampilkan setelah login berhasil
+                                  );
+                                },
+                              ),
                               const SizedBox(
                                 height: 10,
                               ),
                               UnderPart(
-                                  title: "Don't have an account?",
-                                  navigatorText: "Register here",
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const SignUpScreen()));
-                                  }),
+                                title: "Don't have an account?",
+                                navigatorText: "Register here",
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const SignUpScreen()),
+                                  );
+                                },
+                              ),
                               const SizedBox(
                                 height: 20,
                               ),
