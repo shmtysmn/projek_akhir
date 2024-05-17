@@ -20,14 +20,14 @@ class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
         decoration: InputDecoration(
             icon: Icon(
               Icons.lock,
-              color: kPrimaryColor,
+              color: Colors.grey,
             ),
             hintText: "Password",
             hintStyle: TextStyle(fontFamily: 'OpenSans'),
             suffixIcon: IconButton(
               icon: Icon(
                 isObscure ? Icons.visibility : Icons.visibility_off,
-                color: kPrimaryColor,
+                color: Colors.grey,
               ),
               onPressed: () {
                 setState(() {
