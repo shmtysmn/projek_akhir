@@ -32,10 +32,7 @@ class ProfileBodyScreen extends StatelessWidget {
             'user@gmail.com',
             style: vokasiLightGrey,
           ),
-          Text(
-            '08245367289',
-            style: vokasiLightGrey,
-          ),
+
           //card informasi
           Container(
               decoration: BoxDecoration(
@@ -50,7 +47,7 @@ class ProfileBodyScreen extends StatelessWidget {
                     children: [
                       Text('NO HP', style: TextCardLight),
                       const Spacer(),
-                      Text('08973547378', style: TextCardBold),
+                      Text('08973547378', style: TextCardLight),
                       const Icon(
                         Icons.copy,
                         color: Colors.white,
@@ -62,17 +59,17 @@ class ProfileBodyScreen extends StatelessWidget {
                   const Divider(),
                   Row(
                     children: [
-                      Text('hsgsgsg', style: TextCardLight),
+                      Text('ID User', style: TextCardLight),
                       const Spacer(),
-                      Text('apa ya', style: TextCardBold),
+                      Text('001', style: TextCardLight),
                     ],
                   ),
                   const Divider(),
                   Row(
                     children: [
-                      Text('NPM', style: TextCardLight),
+                      Text('Alamat', style: TextCardLight),
                       const Spacer(),
-                      Text('63hegvw', style: TextCardBold),
+                      Text('Jl.Gajah mada', style: TextCardLight),
                     ],
                   ),
                 ],
