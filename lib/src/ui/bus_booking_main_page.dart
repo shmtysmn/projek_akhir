@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:projek_akhir/src/ui/bus_booking_home_screen.dart';
 import 'package:projek_akhir/src/ui/bus_booking_profile_screen.dart';
-import 'package:projek_akhir/src/ui/bus_booking_tiket_page.dart';
 import 'package:projek_akhir/src/ui/bus_booking_trip_page.dart';
 
 final busTicketAppMenuIndex = StateProvider<int>((ref) => 0);
