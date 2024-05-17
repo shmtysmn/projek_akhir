@@ -77,15 +77,6 @@ class SignUpScreen extends StatelessWidget {
                               const SizedBox(
                                 height: 20,
                               ),
-                              const Text(
-                                'Forgot password?',
-                                style: TextStyle(
-                                  color: kPrimaryColor,
-                                  fontFamily: 'OpenSans',
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 13,
-                                ),
-                              ),
                               const SizedBox(
                                 height: 20,
                               )
