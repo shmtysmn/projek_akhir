@@ -125,15 +125,25 @@ iconButton(BuildContext context) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: const [
-      RoundedIcon(imageUrl: "assets/images/facebook.png"),
+      RoundedIcon(
+        imageUrl: "assets/images/facebook.png",
+        url: 'https://www.facebook.com/login/',
+      ),
       SizedBox(
         width: 20,
       ),
-      RoundedIcon(imageUrl: "assets/images/twitter.png"),
+      RoundedIcon(
+        imageUrl: "assets/images/twitter.png",
+        url: 'https://twitter.com/i/flow/login',
+      ),
       SizedBox(
         width: 20,
       ),
-      RoundedIcon(imageUrl: "assets/images/google.jpg"),
+      RoundedIcon(
+        imageUrl: "assets/images/google.jpg",
+        url:
+            'https://myaccount.google.com/?utm_source=sign_in_no_continue&pli=1',
+      ),
     ],
   );
 }
