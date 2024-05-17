@@ -6,6 +6,9 @@ import 'package:projek_akhir/bus_ticket_booking_app.dart';
 // Define color constants
 const kPrimaryColor = Color.fromARGB(255, 39, 241, 96);
 const kPrimaryLightColor = Color(0xFFEEEEEE);
+final Color veppoLightGrey = Color(0xFF999999);
+final Color veppoGrey = Color(0xFF4C4C4C);
+final Color veppoBlue = Color(0xFF1363FF);
 
 void main() {
   runApp(
