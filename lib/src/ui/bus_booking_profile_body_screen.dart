@@ -12,8 +12,8 @@ class ProfileBodyScreen extends StatelessWidget {
     );
     var TextCardLight = GoogleFonts.poppins(
         fontSize: 14, color: Colors.white, fontWeight: FontWeight.normal);
-    var TextCardBold = GoogleFonts.poppins(
-        fontSize: 14.0, fontWeight: FontWeight.bold, color: Colors.white);
+    /* var TextCardBold = GoogleFonts.poppins(
+        fontSize: 14.0, fontWeight: FontWeight.bold, color: Colors.white); */
     return SizedBox(
       width: double.infinity,
       child: Column(
