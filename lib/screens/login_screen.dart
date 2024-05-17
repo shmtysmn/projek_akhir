@@ -67,7 +67,9 @@ class LoginScreen extends StatelessWidget {
                                   // Misalnya, jika login berhasil, navigasi ke halaman lain
                                   Navigator.pushReplacement(
                                     context,
-                                    MaterialPageRoute(builder: (context) => BusTicketBookingApp()), // Ganti dengan halaman lain yang ingin ditampilkan setelah login berhasil
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            BusTicketBookingApp()), // Ganti dengan halaman lain yang ingin ditampilkan setelah login berhasil
                                   );
                                 },
                               ),
@@ -80,7 +82,9 @@ class LoginScreen extends StatelessWidget {
                                 onTap: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => const SignUpScreen()),
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const SignUpScreen()),
                                   );
                                 },
                               ),
@@ -135,15 +139,25 @@ iconButton(BuildContext context) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: const [
-      RoundedIcon(imageUrl: "assets/images/facebook.png"),
+      RoundedIcon(
+        imageUrl: "assets/images/facebook.png",
+        url: 'https://www.facebook.com/login/',
+      ),
       SizedBox(
         width: 20,
       ),
-      RoundedIcon(imageUrl: "assets/images/twitter.png"),
+      RoundedIcon(
+        imageUrl: "assets/images/twitter.png",
+        url: 'https://twitter.com/i/flow/login',
+      ),
       SizedBox(
         width: 20,
       ),
-      RoundedIcon(imageUrl: "assets/images/google.jpg"),
+      RoundedIcon(
+        imageUrl: "assets/images/google.jpg",
+        url:
+            'https://myaccount.google.com/?utm_source=sign_in_no_continue&pli=1',
+      ),
     ],
   );
 }
