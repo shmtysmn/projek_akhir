@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:projek_akhir/src/ui/bus_booking_detail_page.dart';
-import 'package:projek_akhir/src/ui/bus_booking_main_page.dart';
-import 'package:projek_akhir/src/ui/bus_booking_select_page.dart';
+import 'package:projek_akhir/src/ui/detail_page.dart';
+import 'package:projek_akhir/src/ui/booking_main.dart';
+import 'package:projek_akhir/src/ui/select_page.dart';
 
-class BusTicketBookingApp extends StatelessWidget {
-  BusTicketBookingApp({Key? key}) : super(key: key);
+class TiketBooking extends StatelessWidget {
+  TiketBooking({Key? key}) : super(key: key);
   final appRoute = GoRouter(
     routes: [
       GoRoute(
         path: "/",
-        builder: (context, state) => const BusBookingMainPage(),
+        builder: (context, state) => const BookingMain(),
         routes: [
           ShellRoute(
             routes: [
               GoRoute(
                 path: "detail",
-                builder: (context, state) => const BusBookingDetailPage(),
+                builder: (context, state) => const DetailPage(),
               ),
               GoRoute(
                 path: "seat",
-                builder: (context, state) => const BusBookingSelectPage(),
+                builder: (context, state) => const SelectPage(),
               ),
             ],
           ),

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:projek_akhir/src/ui/bus_booking_home_screen.dart';
-import 'package:projek_akhir/src/ui/bus_booking_profile_screen.dart';
-import 'package:projek_akhir/src/ui/bus_booking_trip_page.dart';
+import 'package:projek_akhir/src/ui/home_screen.dart';
+import 'package:projek_akhir/src/ui/profil_page.dart';
+import 'package:projek_akhir/src/ui/trip_page.dart';
 
 final busTicketAppMenuIndex = StateProvider<int>((ref) => 0);
 
-class BusBookingMainPage extends StatefulWidget {
-  const BusBookingMainPage({Key? key}) : super(key: key);
+class BookingMain extends StatefulWidget {
+  const BookingMain({Key? key}) : super(key: key);
 
   @override
-  State<BusBookingMainPage> createState() => _BusBookingMainPageState();
+  State<BookingMain> createState() => _BookingMainState();
 }
 
-class _BusBookingMainPageState extends State<BusBookingMainPage> {
+class _BookingMainState extends State<BookingMain> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, _) {
@@ -24,7 +24,7 @@ class _BusBookingMainPageState extends State<BusBookingMainPage> {
           child: IndexedStack(
             index: index,
             children: [
-              const BusBookingHomeScreen(),
+              const HomeScreen(),
               TripsPage(),
               const ProfileScreen(),
             ],

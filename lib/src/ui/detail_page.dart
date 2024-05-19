@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class BusBookingDetailPage extends StatefulWidget {
-  const BusBookingDetailPage({Key? key}) : super(key: key);
+class DetailPage extends StatefulWidget {
+  const DetailPage({Key? key}) : super(key: key);
 
   @override
-  State<BusBookingDetailPage> createState() => _BusBookingDetailPageState();
+  State<DetailPage> createState() => _DetailPageState();
 }
 
-class _BusBookingDetailPageState extends State<BusBookingDetailPage> {
+class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

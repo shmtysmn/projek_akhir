@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:projek_akhir/src/ui/bus_booking_profile_body_screen.dart';
+import 'package:projek_akhir/src/ui/profil_body.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);

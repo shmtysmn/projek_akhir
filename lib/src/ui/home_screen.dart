@@ -1,19 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
-class BusBookingHomeScreen extends StatefulWidget {
-  const BusBookingHomeScreen({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<BusBookingHomeScreen> createState() => _BusBookingHomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   bool tripType = false;
-  int _counter = 0;
+  int _counter = 1;
   final TextEditingController _fromTec = TextEditingController();
   final TextEditingController _toTec = TextEditingController();
+
+  final TextEditingController _dateController = TextEditingController();
+  DateTime? _selectedDate;
+
+  @override
+  void initState() {
+    super.initState();
+    _dateController.text = DateFormat('dd.MM.yyyy').format(DateTime.now());
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _selectedDate ?? DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null && picked != _selectedDate) {
+      setState(() {
+        _selectedDate = picked;
+        _dateController.text = DateFormat('dd.MM.yyyy').format(picked);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,92 +62,6 @@ class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
               style: GoogleFonts.montserrat(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-              ),
-            ),
-            Center(
-              child: Container(
-                margin: const EdgeInsets.symmetric(vertical: 32),
-                height: 58,
-                width: MediaQuery.of(context).size.width - 160,
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(32),
-                ),
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            tripType = true;
-                          });
-                        },
-                        child: tripType
-                            ? Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.red,
-                                  borderRadius: BorderRadius.circular(32),
-                                ),
-                                child: const Center(
-                                  child: Text(
-                                    "One Way",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              )
-                            : const Center(
-                                child: Text(
-                                  "One Way",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                      ),
-                    ),
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            tripType = false;
-                          });
-                        },
-                        child: !tripType
-                            ? Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.red,
-                                  borderRadius: BorderRadius.circular(32),
-                                ),
-                                child: const Center(
-                                  child: Text(
-                                    "Round Trip",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              )
-                            : const Center(
-                                child: Text(
-                                  "Round Trip",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                      ),
-                    ),
-                  ],
-                ),
               ),
             ),
             Container(
@@ -245,33 +184,8 @@ class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
-                          'Date',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: Colors.grey,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        Text(
-                          "01.11.2022",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
+                      children: [
+                        const Text(
                           'Returning',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -279,19 +193,22 @@ class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
                             color: Colors.grey,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 16,
                         ),
-                        Text(
-                          "Set date",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                        TextField(
+                          controller: _dateController,
+                          readOnly: true,
+                          decoration: const InputDecoration(
+                            suffixIcon: Icon(Icons.calendar_today),
                           ),
+                          onTap: () {
+                            _selectDate(context);
+                          },
                         ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -319,9 +236,11 @@ class _BusBookingHomeScreenState extends State<BusBookingHomeScreen> {
                     children: [
                       IconButton(
                         onPressed: () {
-                          _counter--;
-                          if (_counter <= 1) _counter = 1;
-                          setState(() {});
+                          if (_counter > 1) {
+                            setState(() {
+                              _counter--;
+                            });
+                          }
                         },
                         icon: Icon(
                           Icons.remove,

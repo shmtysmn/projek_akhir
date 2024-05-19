@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:projek_akhir/screens/login_screen.dart';
-import 'package:projek_akhir/bus_ticket_booking_app.dart';
+import 'package:projek_akhir/tiket_booking.dart';
 
 // Define color constants
 const kPrimaryColor = Color.fromARGB(255, 39, 241, 96);
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
             false; // Replace false with your authentication logic
 
         // Return either the login screen or the main app based on authentication status
-        return isAuthenticated ? BusTicketBookingApp() : LoginScreen();
+        return isAuthenticated ? TiketBooking() : LoginScreen();
       }),
     );
   }

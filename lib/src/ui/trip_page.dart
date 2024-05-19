@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projek_akhir/main.dart';
-import 'package:projek_akhir/src/ui/bus_booking_tiket_page.dart';
+import 'package:projek_akhir/src/ui/tiket_page.dart';
 
 class TripsPage extends StatelessWidget {
   @override

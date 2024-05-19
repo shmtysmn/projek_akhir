@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projek_akhir/bus_ticket_booking_app.dart';
+import 'package:projek_akhir/tiket_booking.dart';
 import 'package:projek_akhir/components/under_part.dart';
 import 'package:projek_akhir/components/upside.dart';
 import 'package:projek_akhir/components/page_title_bar.dart';
@@ -69,7 +69,7 @@ class LoginScreen extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            BusTicketBookingApp()), // Ganti dengan halaman lain yang ingin ditampilkan setelah login berhasil
+                                            TiketBooking()), // Ganti dengan halaman lain yang ingin ditampilkan setelah login berhasil
                                   );
                                 },
                               ),
