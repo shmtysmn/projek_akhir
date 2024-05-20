@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-class RoundedPasswordField extends StatefulWidget {
+class RoundedKonfirmPassword extends StatefulWidget {
   final TextEditingController controller;
   final ValueChanged<String>? onChanged;
 
-  const RoundedPasswordField({
+  const RoundedKonfirmPassword({
     Key? key,
     required this.controller,
     this.onChanged,
   }) : super(key: key);
 
   @override
-  State<RoundedPasswordField> createState() => _RoundedPasswordFieldState();
+  State<RoundedKonfirmPassword> createState() => _RoundedPasswordFieldState();
 }
 
-class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
+class _RoundedPasswordFieldState extends State<RoundedKonfirmPassword> {
   bool isObscure = true;
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
             Icons.lock,
             color: Colors.grey[700],
           ),
-          hintText: "Password",
+          hintText: "konfirm Password",
           hintStyle: TextStyle(fontFamily: 'OpenSans'),
           suffixIcon: IconButton(
             icon: Icon(
