@@ -3,6 +3,7 @@ import 'package:projek_akhir/components/under_part.dart';
 import 'package:projek_akhir/components/upside.dart';
 import 'package:projek_akhir/components/page_title_bar.dart';
 import 'package:projek_akhir/screens/login_screen.dart';
+import 'package:projek_akhir/widgets/rounded_konfirm_password.dart';
 import 'package:projek_akhir/widgets/widgets.dart';
 import 'package:projek_akhir/main.dart';
 
@@ -17,6 +18,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _namaController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _konfirmController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -65,19 +67,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: Column(
                             children: [
                               RoundedInputField(
-                                hintText: "Email",
+                                hintText: "Username",
                                 icon: Icons.email,
                                 controller: _emailController,
                               ),
                               RoundedInputField(
-                                hintText: "Nama",
+                                hintText: "Email",
                                 icon: Icons.person,
                                 controller: _namaController,
                               ),
                               RoundedPasswordField(
                                 controller: _passwordController,
                               ),
-                              RoundedButton(text: 'REGISTER', press: () {}),
+                              RoundedKonfirmPassword(
+                                controller: _konfirmController,
+                              ),
                               const SizedBox(
                                 height: 10,
                               ),
