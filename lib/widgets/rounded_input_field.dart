@@ -1,26 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:projek_akhir/main.dart';
-import 'package:projek_akhir/widgets/widgets.dart';
 
 class RoundedInputField extends StatelessWidget {
-  const RoundedInputField({Key? key, this.hintText, this.icon = Icons.person})
-      : super(key: key);
-  final String? hintText;
+  final String hintText;
   final IconData icon;
+  final TextEditingController controller;
+  final ValueChanged<String>? onChanged;
+  
+  const RoundedInputField({
+    Key? key,
+    required this.hintText,
+    required this.icon,
+    required this.controller,
+    this.onChanged,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return TextFieldContainer(
-      child: TextFormField(
-        cursorColor: kPrimaryColor,
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+      width: MediaQuery.of(context).size.width * 0.8,
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(29),
+      ),
+      child: TextField(
+        controller: controller,
+        onChanged: onChanged,
         decoration: InputDecoration(
-            icon: Icon(
-              icon,
-              color: Colors.grey,
-            ),
-            hintText: hintText,
-            hintStyle: const TextStyle(fontFamily: 'OpenSans'),
-            border: InputBorder.none),
+          icon: Icon(
+            icon,
+            color: Colors.grey[700],
+          ),
+          hintText: hintText,
+          border: InputBorder.none,
+        ),
       ),
     );
   }

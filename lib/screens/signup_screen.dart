@@ -2,12 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:projek_akhir/components/under_part.dart';
 import 'package:projek_akhir/components/upside.dart';
 import 'package:projek_akhir/components/page_title_bar.dart';
-import 'package:projek_akhir/main.dart';
 import 'package:projek_akhir/screens/login_screen.dart';
 import 'package:projek_akhir/widgets/widgets.dart';
+import 'package:projek_akhir/main.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
+
+  @override
+  _SignUpScreenState createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _namaController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -55,25 +64,34 @@ class SignUpScreen extends StatelessWidget {
                         Form(
                           child: Column(
                             children: [
-                              const RoundedInputField(
-                                  hintText: "Email", icon: Icons.email),
-                              const RoundedInputField(
-                                  hintText: "Nama", icon: Icons.person),
-                              const RoundedPasswordField(),
+                              RoundedInputField(
+                                hintText: "Email",
+                                icon: Icons.email,
+                                controller: _emailController,
+                              ),
+                              RoundedInputField(
+                                hintText: "Nama",
+                                icon: Icons.person,
+                                controller: _namaController,
+                              ),
+                              RoundedPasswordField(
+                                controller: _passwordController,
+                              ),
                               RoundedButton(text: 'REGISTER', press: () {}),
                               const SizedBox(
                                 height: 10,
                               ),
                               UnderPart(
-                                  title: "Already have an account?",
-                                  navigatorText: "Login here",
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const LoginScreen()));
-                                  }),
+                                title: "Already have an account?",
+                                navigatorText: "Login here",
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const LoginScreen()));
+                                },
+                              ),
                               const SizedBox(
                                 height: 20,
                               ),
@@ -94,47 +112,47 @@ class SignUpScreen extends StatelessWidget {
       ),
     );
   }
-}
 
-switchListTile() {
-  return Padding(
-    padding: const EdgeInsets.only(left: 50, right: 40),
-    child: SwitchListTile(
-      dense: true,
-      title: const Text(
-        'Remember me',
-        style: TextStyle(fontSize: 16, fontFamily: 'OpenSans'),
+  Widget switchListTile() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 50, right: 40),
+      child: SwitchListTile(
+        dense: true,
+        title: const Text(
+          'Remember me',
+          style: TextStyle(fontSize: 16, fontFamily: 'OpenSans'),
+        ),
+        value: true,
+        activeColor: kPrimaryColor,
+        onChanged: (val) {},
       ),
-      value: true,
-      activeColor: kPrimaryColor,
-      onChanged: (val) {},
-    ),
-  );
-}
+    );
+  }
 
-iconButton(BuildContext context) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: const [
-      RoundedIcon(
-        imageUrl: "assets/images/facebook.png",
-        url: 'https://www.facebook.com/login/',
-      ),
-      SizedBox(
-        width: 20,
-      ),
-      RoundedIcon(
-        imageUrl: "assets/images/twitter.png",
-        url: 'https://twitter.com/i/flow/login',
-      ),
-      SizedBox(
-        width: 20,
-      ),
-      RoundedIcon(
-        imageUrl: "assets/images/google.jpg",
-        url:
-            'https://myaccount.google.com/?utm_source=sign_in_no_continue&pli=1',
-      ),
-    ],
-  );
+  Widget iconButton(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: const [
+        RoundedIcon(
+          imageUrl: "assets/images/facebook.png",
+          url: 'https://www.facebook.com/login/',
+        ),
+        SizedBox(
+          width: 20,
+        ),
+        RoundedIcon(
+          imageUrl: "assets/images/twitter.png",
+          url: 'https://twitter.com/i/flow/login',
+        ),
+        SizedBox(
+          width: 20,
+        ),
+        RoundedIcon(
+          imageUrl: "assets/images/google.jpg",
+          url:
+              'https://myaccount.google.com/?utm_source=sign_in_no_continue&pli=1',
+        ),
+      ],
+    );
+  }
 }

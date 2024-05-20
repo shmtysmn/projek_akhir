@@ -7,8 +7,21 @@ import 'package:projek_akhir/main.dart';
 import 'package:projek_akhir/screens/signup_screen.dart';
 import 'package:projek_akhir/widgets/widgets.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  bool _rememberMe = false;
+
+  bool _isFormValid() {
+    return _emailController.text.isNotEmpty && _passwordController.text.isNotEmpty;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,21 +69,32 @@ class LoginScreen extends StatelessWidget {
                         Form(
                           child: Column(
                             children: [
-                              const RoundedInputField(
-                                  hintText: "Email", icon: Icons.email),
-                              const RoundedPasswordField(),
+                              RoundedInputField(
+                                hintText: "Email",
+                                icon: Icons.email,
+                                controller: _emailController,
+                              ),
+                              RoundedPasswordField(
+                                controller: _passwordController,
+                              ),
                               switchListTile(),
                               RoundedButton(
                                 text: 'LOGIN',
                                 press: () {
-                                  // Logika login di sini
-                                  // Misalnya, jika login berhasil, navigasi ke halaman lain
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            TiketBooking()), // Ganti dengan halaman lain yang ingin ditampilkan setelah login berhasil
-                                  );
+                                  if (_isFormValid()) {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => TiketBooking(), // Ganti dengan halaman lain yang ingin ditampilkan setelah login berhasil
+                                      ),
+                                    );
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Please enter email and password'),
+                                      ),
+                                    );
+                                  }
                                 },
                               ),
                               const SizedBox(
@@ -91,18 +115,6 @@ class LoginScreen extends StatelessWidget {
                               const SizedBox(
                                 height: 20,
                               ),
-                              const Text(
-                                'Forgot password?',
-                                style: TextStyle(
-                                  color: kPrimaryColor,
-                                  fontFamily: 'OpenSans',
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 13,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              )
                             ],
                           ),
                         )
@@ -117,47 +129,51 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
-}
 
-switchListTile() {
-  return Padding(
-    padding: const EdgeInsets.only(left: 50, right: 40),
-    child: SwitchListTile(
-      dense: true,
-      title: const Text(
-        'Remember me',
-        style: TextStyle(fontSize: 16, fontFamily: 'OpenSans'),
+  Widget switchListTile() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 50, right: 40),
+      child: SwitchListTile(
+        dense: true,
+        title: const Text(
+          'Remember me',
+          style: TextStyle(fontSize: 16, fontFamily: 'OpenSans'),
+        ),
+        value: _rememberMe,
+        activeColor: kPrimaryColor,
+        onChanged: (val) {
+          setState(() {
+            _rememberMe = val;
+          });
+        },
       ),
-      value: true,
-      activeColor: Colors.grey,
-      onChanged: (val) {},
-    ),
-  );
-}
+    );
+  }
 
-iconButton(BuildContext context) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: const [
-      RoundedIcon(
-        imageUrl: "assets/images/facebook.png",
-        url: 'https://www.facebook.com/login/',
-      ),
-      SizedBox(
-        width: 20,
-      ),
-      RoundedIcon(
-        imageUrl: "assets/images/twitter.png",
-        url: 'https://twitter.com/i/flow/login',
-      ),
-      SizedBox(
-        width: 20,
-      ),
-      RoundedIcon(
-        imageUrl: "assets/images/google.jpg",
-        url:
-            'https://myaccount.google.com/?utm_source=sign_in_no_continue&pli=1',
-      ),
-    ],
-  );
+  Widget iconButton(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: const [
+        RoundedIcon(
+          imageUrl: "assets/images/facebook.png",
+          url: 'https://www.facebook.com/login/',
+        ),
+        SizedBox(
+          width: 20,
+        ),
+        RoundedIcon(
+          imageUrl: "assets/images/twitter.png",
+          url: 'https://twitter.com/i/flow/login',
+        ),
+        SizedBox(
+          width: 20,
+        ),
+        RoundedIcon(
+          imageUrl: "assets/images/google.jpg",
+          url:
+              'https://myaccount.google.com/?utm_source=sign_in_no_continue&pli=1',
+        ),
+      ],
+    );
+  }
 }
