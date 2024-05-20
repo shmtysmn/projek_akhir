@@ -13,9 +13,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   bool tripType = false;
   int _counter = 1;
-  final TextEditingController _fromTec = TextEditingController();
-  final TextEditingController _toTec = TextEditingController();
-
+  String? _selectedFromValue;
+  String? _selectedToValue;
+  final List<String> _dropdownItems = ['Option 1', 'Option 2', 'Option 3'];
   final TextEditingController _dateController = TextEditingController();
   DateTime? _selectedDate;
 
@@ -49,174 +49,63 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Book tickets for your",
+              "Rute Bus Akas Asri",
               style: GoogleFonts.montserrat(
                 fontSize: 24,
               ),
             ),
-            const SizedBox(
-              height: 8,
-            ),
+            const SizedBox(height: 8),
             Text(
-              "next trip",
+              "Jember-Bali",
               style: GoogleFonts.montserrat(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Container(
-              height: 140,
-              child: Stack(
-                children: [
-                  Positioned(
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    top: 0,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 8),
-                          decoration: BoxDecoration(
-                            border: Border.all(),
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
-                          ),
-                          child: Row(
-                            children: [
-                              const Text(
-                                "From",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 14,
-                              ),
-                              Expanded(
-                                child: TextField(
-                                  controller: _fromTec,
-                                  style: const TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  decoration: const InputDecoration(
-                                    border: InputBorder.none,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 0),
-                          decoration: BoxDecoration(
-                            border: Border.all(),
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
-                          ),
-                          child: Row(
-                            children: [
-                              const Text(
-                                "To",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 14,
-                              ),
-                              Expanded(
-                                child: TextField(
-                                  controller: _toTec,
-                                  style: const TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  decoration: const InputDecoration(
-                                    border: InputBorder.none,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Positioned(
-                    right: 16,
-                    bottom: 16,
-                    top: 16,
-                    child: GestureDetector(
-                      onTap: () {
-                        final tmpText = _fromTec.text;
-                        _fromTec.text = _toTec.text;
-                        _toTec.text = tmpText;
-                        setState(() {});
-                      },
-                      child: const Center(
-                        child: CircleAvatar(
-                          radius: 32,
-                          backgroundColor: Colors.red,
-                          foregroundColor: Colors.white,
-                          child: Icon(
-                            Icons.sync,
-                          ),
+            const SizedBox(height: 16),
+            _buildLocationDropdown("From", _selectedFromValue, (String? newValue) {
+              setState(() {
+                _selectedFromValue = newValue;
+              });
+            }),
+            const SizedBox(height: 32),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'tanggal berangkat',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Colors.grey,
                         ),
                       ),
-                    ),
+                      const SizedBox(height: 16),
+                      TextField(
+                        controller: _dateController,
+                        readOnly: true,
+                        decoration: const InputDecoration(
+                          suffixIcon: Icon(Icons.calendar_today),
+                        ),
+                        onTap: () {
+                          _selectDate(context);
+                        },
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 32),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Date',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: Colors.grey,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        TextField(
-                          controller: _dateController,
-                          readOnly: true,
-                          decoration: const InputDecoration(
-                            suffixIcon: Icon(Icons.calendar_today),
-                          ),
-                          onTap: () {
-                            _selectDate(context);
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            const SizedBox(height: 32),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  "Passengers",
+                  "jumlah",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
@@ -260,28 +149,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             _counter++;
                           });
                         },
-                        icon: const Icon(
-                          Icons.add,
-                        ),
+                        icon: const Icon(Icons.add),
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
-            const SizedBox(
-              height: 48,
-            ),
-            const Text(
-              "Do you have promocode?",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              ),
-            ),
-            const SizedBox(
-              height: 48,
-            ),
+            const SizedBox(height: 48),
             GestureDetector(
               onTap: () {
                 context.push("/detail");
@@ -299,9 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Icons.search,
                       color: Colors.white,
                     ),
-                    SizedBox(
-                      width: 12,
-                    ),
+                    SizedBox(width: 12),
                     Text(
                       "Search for Trips",
                       style: TextStyle(
@@ -313,9 +186,100 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-            )
+            ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildLocationDropdown(
+      String label, String? selectedValue, ValueChanged<String?> onChanged) {
+    return Container(
+      height: 140,
+      child: Stack(
+        children: [
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            top: 0,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(bottom: 8),
+                  decoration: BoxDecoration(
+                    border: Border.all(),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
+                  child: Row(
+                    children: [
+                      Text(
+                        label,
+                        style: const TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: DropdownButton<String>(
+                          isExpanded: true,
+                          value: selectedValue,
+                          hint: const Text(
+                            "Select an option",
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          items: _dropdownItems.map((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: const TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: onChanged,
+                          underline: Container(), // Removes the default underline
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            right: 16,
+            bottom: 16,
+            top: 16,
+            child: GestureDetector(
+              onTap: () {
+                final tmpText = selectedValue;
+                selectedValue = selectedValue == _selectedFromValue ? _selectedToValue : _selectedFromValue;
+                onChanged(selectedValue);
+              },
+              child: const Center(
+                child: CircleAvatar(
+                  radius: 32,
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white,
+                  child: Icon(Icons.sync),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
