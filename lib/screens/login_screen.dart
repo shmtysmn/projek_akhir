@@ -22,7 +22,7 @@ class LoginScreen extends StatelessWidget {
             child: Stack(
               children: [
                 const Upside(
-                  imgUrl: "assets/images/login.png",
+                  imgUrl: "assets/images/bus-2.png",
                 ),
                 const PageTitleBar(title: 'Login to your account'),
                 Padding(
@@ -129,7 +129,7 @@ switchListTile() {
         style: TextStyle(fontSize: 16, fontFamily: 'OpenSans'),
       ),
       value: true,
-      activeColor: kPrimaryColor,
+      activeColor: Colors.grey,
       onChanged: (val) {},
     ),
   );

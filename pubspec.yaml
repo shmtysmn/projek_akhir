@@ -63,12 +63,19 @@ flutter:
     - assets/images/register.png
     - assets/images/user.png
     - assets/images/gol_logo.png
-    - assets/images/latam_logo.png
+    - assets/images/bus.png
+    - assets/images/bus-2.png
+
+
 
   fonts:
     - family: OpenSans
       fonts:
         - asset: assets/fonts/OpenSans-Regular.ttf
+    #- family: Barcode
+     # fonts: 
+      #  - asset: assets/fonts/LibreBarcode128-Regular.ttf
+
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:projek_akhir/main.dart';
 
 class ProfileBodyScreen extends StatelessWidget {
   const ProfileBodyScreen({Key? key}) : super(key: key);
@@ -36,7 +37,7 @@ class ProfileBodyScreen extends StatelessWidget {
           //card informasi
           Container(
               decoration: BoxDecoration(
-                color: Colors.red,
+                color: veppoBlue,
                 borderRadius: BorderRadius.circular(12.0),
               ),
               padding: const EdgeInsets.all(12.0),

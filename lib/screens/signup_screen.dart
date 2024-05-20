@@ -21,7 +21,7 @@ class SignUpScreen extends StatelessWidget {
             child: Stack(
               children: [
                 const Upside(
-                  imgUrl: "assets/images/register.png",
+                  imgUrl: "assets/images/bus-2.png",
                 ),
                 const PageTitleBar(title: 'Create new account'),
                 Padding(

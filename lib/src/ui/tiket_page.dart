@@ -199,7 +199,7 @@ class TripTicketPage extends StatelessWidget {
                         child: Text(
                           'barccodebarcodeb',
                           style: TextStyle(
-                            fontFamily: 'LibreBarcode',
+                            fontFamily: 'Barcode',
                           ),
                         ),
                       ),

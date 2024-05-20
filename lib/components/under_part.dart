@@ -35,8 +35,8 @@ class UnderPart extends StatelessWidget {
           },
           child: Text(
             navigatorText,
-            style: const TextStyle(
-                color: kPrimaryColor,
+            style: TextStyle(
+                color: veppoBlue,
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
                 fontFamily: 'OpenSans'),

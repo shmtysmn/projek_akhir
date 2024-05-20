@@ -186,7 +186,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          'Returning',
+                          'Date',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
