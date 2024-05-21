@@ -130,6 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+
   Widget switchListTile() {
     return Padding(
       padding: const EdgeInsets.only(left: 50, right: 40),
@@ -177,3 +178,11 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+
+void _logout(BuildContext context) {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => LoginScreen(),
+      ),
+    );
+  }
