@@ -179,10 +179,4 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-void _logout(BuildContext context) {
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => LoginScreen(),
-      ),
-    );
-  }
+

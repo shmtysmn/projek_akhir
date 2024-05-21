@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:projek_akhir/screens/login_screen.dart';
+import 'package:projek_akhir/tiket_booking.dart';
 
-
-
-class LoginScreen extends StatelessWidget {
+class ProfilScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +38,10 @@ class ProfileBodyScreen extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.logout),
             onPressed: () {
-              _logout(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                );
             },
           ),
         ],
