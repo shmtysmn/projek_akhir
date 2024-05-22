@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projek_akhir/screens/login_screen.dart';
-import 'package:projek_akhir/tiket_booking.dart';
 
-class ProfilScreen extends StatelessWidget {
+class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,10 +37,7 @@ class ProfileBodyScreen extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.logout),
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginScreen()),
-                );
+              _showLogoutDialog(context);
             },
           ),
         ],
@@ -129,6 +125,33 @@ class ProfileBodyScreen extends StatelessWidget {
     );
   }
 
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Logout"),
+          content: Text("Are you sure you want to logout?"),
+          actions: <Widget>[
+            TextButton(
+              child: Text("Cancel"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text("Logout"),
+              onPressed: () {
+                Navigator.of(context).pop();
+                _logout(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void _logout(BuildContext context) {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
@@ -148,8 +171,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   String _name = '';
   String _email = '';
   String _phone = '';
-  String _password = '';
-
+  String _password = ''; // Added password field
 
   @override
   Widget build(BuildContext context) {
