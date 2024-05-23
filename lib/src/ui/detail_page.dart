@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:projek_akhir/main.dart';
 
 class DetailPage extends StatefulWidget {
   const DetailPage({Key? key}) : super(key: key);
@@ -16,10 +17,10 @@ class _DetailPageState extends State<DetailPage> {
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.red,
+        backgroundColor: veppoBlue,
+        foregroundColor: veppoBlue,
         title: const Text(
-          "Dream > Walker",
+          "Harga Tiket",
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
@@ -30,7 +31,7 @@ class _DetailPageState extends State<DetailPage> {
         children: [
           Container(
             height: 64,
-            color: Colors.blue,
+            color: const Color.fromARGB(255, 171, 194, 214),
           ),
           Container(
             margin: const EdgeInsets.all(16),
@@ -76,7 +77,7 @@ class _DetailPageState extends State<DetailPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: const [
                                 Text(
-                                  "Departure",
+                                  "jember",
                                   style: TextStyle(
                                     fontSize: 16,
                                   ),
@@ -94,7 +95,7 @@ class _DetailPageState extends State<DetailPage> {
                                   ),
                                 ),
                                 Text(
-                                  "Dream",
+                                  "",
                                   style: TextStyle(
                                     fontSize: 16,
                                   ),
@@ -105,7 +106,7 @@ class _DetailPageState extends State<DetailPage> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: const [
                                 Text(
-                                  "Arrival",
+                                  "",
                                   style: TextStyle(
                                     fontSize: 16,
                                   ),
@@ -123,7 +124,7 @@ class _DetailPageState extends State<DetailPage> {
                                   ),
                                 ),
                                 Text(
-                                  "Walker Station",
+                                  "Banyuwangi",
                                   style: TextStyle(
                                     fontSize: 16,
                                   ),
@@ -152,7 +153,7 @@ class _DetailPageState extends State<DetailPage> {
                           },
                           child: Container(
                             decoration: BoxDecoration(
-                              color: Colors.red,
+                              color: veppoBlue,
                               borderRadius: BorderRadius.circular(32),
                             ),
                             padding: const EdgeInsets.symmetric(vertical: 16),
@@ -161,7 +162,7 @@ class _DetailPageState extends State<DetailPage> {
                                 TextSpan(
                                   children: [
                                     TextSpan(
-                                      text: "12.90 €",
+                                      text: "Rp 30.000",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
@@ -180,471 +181,10 @@ class _DetailPageState extends State<DetailPage> {
                               ),
                             ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
-                  const Divider(),
-                  Container(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                Text(
-                                  "Departure",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: 8,
-                                  ),
-                                  child: Text(
-                                    "6:30",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ),
-                                Text(
-                                  "Dream",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: const [
-                                Text(
-                                  "Arrival",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: 8,
-                                  ),
-                                  child: Text(
-                                    "12:30",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ),
-                                Text(
-                                  "Walker Station",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 24),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Icon(Icons.accessible),
-                              Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Icon(Icons.work),
-                              ),
-                              Icon(Icons.electrical_services),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: BorderRadius.circular(32),
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          child: const Center(
-                            child: Text.rich(
-                              TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: "12.90 €",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: " per ticket",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  const Divider(),
-                  Container(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                Text(
-                                  "Departure",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: 8,
-                                  ),
-                                  child: Text(
-                                    "6:30",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ),
-                                Text(
-                                  "Dream",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: const [
-                                Text(
-                                  "Arrival",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: 8,
-                                  ),
-                                  child: Text(
-                                    "12:30",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ),
-                                Text(
-                                  "Walker Station",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 24),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Icon(Icons.accessible),
-                              Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Icon(Icons.work),
-                              ),
-                              Icon(Icons.electrical_services),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: BorderRadius.circular(32),
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          child: const Center(
-                            child: Text.rich(
-                              TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: "12.90 €",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: " per ticket",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  const Divider(),
-                  Container(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                Text(
-                                  "Departure",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: 8,
-                                  ),
-                                  child: Text(
-                                    "6:30",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ),
-                                Text(
-                                  "Dream",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: const [
-                                Text(
-                                  "Arrival",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: 8,
-                                  ),
-                                  child: Text(
-                                    "12:30",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ),
-                                Text(
-                                  "Walker Station",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 24),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Icon(Icons.accessible),
-                              Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Icon(Icons.work),
-                              ),
-                              Icon(Icons.electrical_services),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: BorderRadius.circular(32),
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          child: const Center(
-                            child: Text.rich(
-                              TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: "12.90 €",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: " per ticket",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  const Divider(),
-                  Container(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                Text(
-                                  "Departure",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: 8,
-                                  ),
-                                  child: Text(
-                                    "6:30",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ),
-                                Text(
-                                  "Dream",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: const [
-                                Text(
-                                  "Arrival",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: 8,
-                                  ),
-                                  child: Text(
-                                    "12:30",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ),
-                                Text(
-                                  "Walker Station",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 24),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Icon(Icons.accessible),
-                              Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Icon(Icons.work),
-                              ),
-                              Icon(Icons.electrical_services),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: BorderRadius.circular(32),
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          child: const Center(
-                            child: Text.rich(
-                              TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: "12.90 €",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: " per ticket",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  const Divider(),
                 ],
               ),
             ),

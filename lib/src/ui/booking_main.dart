@@ -43,13 +43,13 @@ class _BookingMainState extends State<BookingMain> {
                 icon: Icon(
                   Icons.search,
                 ),
-                label: "Booking",
+                label: "Pesan",
               ),
               BottomNavigationBarItem(
                 icon: Icon(
                   Icons.confirmation_number,
                 ),
-                label: "Tickets",
+                label: "Riwayat Pemesanan",
               ),
               BottomNavigationBarItem(
                 icon: Icon(

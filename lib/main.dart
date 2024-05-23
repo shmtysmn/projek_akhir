@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // Return LoginScreen as the home if the user is not authenticated
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'BlueBus',
       theme: ThemeData(
         primaryColor: kPrimaryColor,
         colorScheme: ColorScheme.fromSeed(

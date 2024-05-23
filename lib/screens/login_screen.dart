@@ -3,7 +3,6 @@ import 'package:projek_akhir/tiket_booking.dart';
 import 'package:projek_akhir/components/under_part.dart';
 import 'package:projek_akhir/components/upside.dart';
 import 'package:projek_akhir/components/page_title_bar.dart';
-import 'package:projek_akhir/main.dart';
 import 'package:projek_akhir/screens/signup_screen.dart';
 import 'package:projek_akhir/widgets/widgets.dart';
 
@@ -19,8 +18,22 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
   bool _rememberMe = false;
 
-  bool _isFormValid() {
-    return _emailController.text.isNotEmpty && _passwordController.text.isNotEmpty;
+  // Metode untuk memeriksa apakah email valid
+  bool _isEmailValid(String email) {
+    return email.contains('@') && email.contains('.com');
+  }
+
+  // Metode untuk memeriksa apakah password valid (minimal 8 karakter)
+  bool _isPasswordValid(String password) {
+    return password.length >= 8;
+  }
+
+  void _showErrorSnackbar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
   }
 
   @override
@@ -43,85 +56,86 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Container(
                     width: double.infinity,
                     decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(50),
-                          topRight: Radius.circular(50),
-                        )),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(50),
+                        topRight: Radius.circular(50),
+                      ),
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const SizedBox(
-                          height: 15,
-                        ),
+                        const SizedBox(height: 15),
                         iconButton(context),
-                        const SizedBox(
-                          height: 20,
-                        ),
+                        const SizedBox(height: 20),
                         const Text(
                           "or use your email account",
                           style: TextStyle(
-                              color: Colors.grey,
-                              fontFamily: 'OpenSans',
-                              fontSize: 13,
-                              fontWeight: FontWeight.w600),
+                            color: Colors.grey,
+                            fontFamily: 'OpenSans',
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                        Form(
-                          child: Column(
-                            children: [
-                              RoundedInputField(
-                                hintText: "Email",
-                                icon: Icons.email,
-                                controller: _emailController,
-                              ),
-                              RoundedPasswordField(
-                                controller: _passwordController,
-                              ),
-                              switchListTile(),
-                              RoundedButton(
-                                text: 'LOGIN',
-                                press: () {
-                                  if (_isFormValid()) {
+                        Column(
+                          children: [
+                            RoundedInputField(
+                              hintText: "Email",
+                              icon: Icons.email,
+                              controller: _emailController,
+                            ),
+                            RoundedPasswordField(
+                              controller: _passwordController,
+                            ),
+                            switchListTile(),
+                            RoundedButton(
+                              text: 'LOGIN',
+                              press: () {
+                                String email = _emailController.text;
+                                String password = _passwordController.text;
+                                if (email.isNotEmpty && password.isNotEmpty) {
+                                  if (_isEmailValid(email) && _isPasswordValid(password)) {
+                                    // Navigasi jika valid
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => TiketBooking(), // Ganti dengan halaman lain yang ingin ditampilkan setelah login berhasil
+                                        builder: (context) =>  TiketBooking(),
                                       ),
                                     );
                                   } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text('Please enter email and password'),
-                                      ),
+                                    // Tampilkan pesan kesalahan jika tidak valid
+                                    _showErrorSnackbar(
+                                      'Please enter a valid email (nama@gmail.com) and password (minimum 8 characters)',
                                     );
                                   }
-                                },
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              UnderPart(
-                                title: "Don't have an account?",
-                                navigatorText: "Register here",
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const SignUpScreen()),
+                                } else {
+                                  // Tampilkan pesan kesalahan jika form tidak lengkap
+                                  _showErrorSnackbar(
+                                    'Please enter email and password',
                                   );
-                                },
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                            ],
-                          ),
-                        )
+                                }
+                              },
+                            ),
+                            const SizedBox(height: 10),
+                            UnderPart(
+                              title: "Don't have an account?",
+                              navigatorText: "Register here",
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const SignUpScreen(),
+                                  ),
+                                );
+                              },
+                            ),
+                            const SizedBox(height: 20),
+                          ],
+                        ),
                       ],
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -140,40 +154,13 @@ class _LoginScreenState extends State<LoginScreen> {
           style: TextStyle(fontSize: 16, fontFamily: 'OpenSans'),
         ),
         value: _rememberMe,
-        activeColor: kPrimaryColor,
+        activeColor: Theme.of(context).primaryColor,
         onChanged: (val) {
           setState(() {
             _rememberMe = val;
           });
         },
       ),
-    );
-  }
-
-  Widget iconButton(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
-        RoundedIcon(
-          imageUrl: "assets/images/facebook.png",
-          url: 'https://www.facebook.com/login/',
-        ),
-        SizedBox(
-          width: 20,
-        ),
-        RoundedIcon(
-          imageUrl: "assets/images/twitter.png",
-          url: 'https://twitter.com/i/flow/login',
-        ),
-        SizedBox(
-          width: 20,
-        ),
-        RoundedIcon(
-          imageUrl: "assets/images/google.jpg",
-          url:
-              'https://myaccount.google.com/?utm_source=sign_in_no_continue&pli=1',
-        ),
-      ],
     );
   }
 }

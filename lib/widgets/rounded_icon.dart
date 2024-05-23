@@ -8,8 +8,9 @@ class RoundedIcon extends StatelessWidget {
   final String url;
 
   Future<void> _launchURL() async {
-    if (await canLaunch(url)) {
-      await launch(url);
+    final Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
     } else {
       throw 'Could not launch $url';
     }
@@ -23,16 +24,52 @@ class RoundedIcon extends StatelessWidget {
         width: 40,
         height: 40,
         decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.white,
-            boxShadow: const [
-              BoxShadow(
-                  color: Colors.black26, offset: Offset(0, 2), blurRadius: 0.6),
-            ],
-            image: DecorationImage(
-              image: AssetImage(imageUrl),
-            )),
+          shape: BoxShape.circle,
+          color: Colors.white,
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black26,
+              offset: Offset(0, 2),
+              blurRadius: 0.6,
+            ),
+          ],
+          image: DecorationImage(
+            image: AssetImage(imageUrl),
+            fit: BoxFit.cover,
+          ),
+        ),
       ),
+    );
+  }
+}
+
+class SocialIconsRow extends StatelessWidget {
+  const SocialIconsRow({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: const [
+        RoundedIcon(
+          imageUrl: "assets/images/facebook.png",
+          url: 'https://www.facebook.com/login/',
+        ),
+        SizedBox(
+          width: 20,
+        ),
+        RoundedIcon(
+          imageUrl: "assets/images/twitter.png",
+          url: 'https://twitter.com/i/flow/login',
+        ),
+        SizedBox(
+          width: 20,
+        ),
+        RoundedIcon(
+          imageUrl: "assets/images/google.jpg",
+          url: 'https://myaccount.google.com/?utm_source=sign_in_no_continue&pli=1',
+        ),
+      ],
     );
   }
 }
