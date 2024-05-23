@@ -9,12 +9,129 @@ class SelectPage extends StatefulWidget {
 }
 
 class _SelectPageState extends State<SelectPage> {
+  String? _selectedSeat;
+  String? _paymentMethod;
+
+  void _onSeatTap(String seatNumber) {
+    setState(() {
+      if (_selectedSeat == seatNumber) {
+        _selectedSeat = null; // Deselect if the seat is already selected
+      } else {
+        _selectedSeat = seatNumber; // Select the new seat
+      }
+    });
+  }
+
+  void _showConfirmationForm() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Konfirmasi bangku $_selectedSeat'),
+          content: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(height: 16),
+                TextField(
+                  decoration: const InputDecoration(
+                    labelText: 'Nama',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  decoration: const InputDecoration(
+                    labelText: 'NIK',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  decoration: const InputDecoration(
+                    labelText: 'No telpon',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  decoration: const InputDecoration(
+                    labelText: 'Alamat',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  'Payment Details:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16),
+                DropdownButtonFormField<String>(
+                  decoration: InputDecoration(
+                    labelText: 'Metode Pembayaran',
+                    border: OutlineInputBorder(),
+                  ),
+                  value: _paymentMethod,
+                  onChanged: (newValue) {
+                    setState(() {
+                      _paymentMethod = newValue!;
+                    });
+                  },
+                  items: ['Cash', 'kartu kredit', 'Transfer Bank']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  decoration: const InputDecoration(
+                    labelText: 'Total Pembayaran',
+                    border: OutlineInputBorder(),
+                  ),
+                  keyboardType: TextInputType.number,
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                // Handle the form submission
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red,
+              ),
+              child: const Text(
+                "Submit",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        title: const Text("Select Sear"),
+        title: const Text("Pilih Kursi"),
         titleTextStyle: const TextStyle(
           fontSize: 28,
           fontWeight: FontWeight.w900,
@@ -48,22 +165,7 @@ class _SelectPageState extends State<SelectPage> {
                   ),
                 ),
                 const Text(
-                  "Standard",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),
-                ),
-                Container(
-                  height: 32,
-                  width: 32,
-                  decoration: BoxDecoration(
-                    color: Colors.orange,
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                ),
-                const Text(
-                  "Premium",
+                  "Tersedia",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
@@ -83,7 +185,7 @@ class _SelectPageState extends State<SelectPage> {
                   ),
                 ),
                 const Text(
-                  "Taken",
+                  "Sudah dipesan",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
@@ -106,383 +208,81 @@ class _SelectPageState extends State<SelectPage> {
                     children: [
                       Row(
                         children: [
-                          Container(
-                            height: 48,
-                            width: 48,
-                            margin: const EdgeInsets.only(right: 16),
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Colors.red,
-                                width: 3,
-                              ),
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                "1",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            height: 48,
-                            width: 48,
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.red,
-                                  width: 3,
-                                ),
-                                borderRadius: BorderRadius.circular(6)),
-                            child: const Center(
-                              child: Text(
-                                "2",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const Spacer(),
-                          Container(
-                            margin: const EdgeInsets.only(right: 16),
-                            height: 48,
-                            width: 48,
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.red,
-                                  width: 3,
-                                ),
-                                borderRadius: BorderRadius.circular(6)),
-                            child: const Center(
-                              child: Text(
-                                "3",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            height: 48,
-                            width: 48,
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.red,
-                                  width: 3,
-                                ),
-                                borderRadius: BorderRadius.circular(6)),
-                            child: const Center(
-                              child: Text(
-                                "4",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          )
+                          _buildSeat("1", Colors.red),
+                          _buildSeat("2", Colors.red),
+                          Spacer(),
+                          _buildSeat("3", Colors.red),
+                          _buildSeat("4", Colors.red),
                         ],
                       ),
-                      const SizedBox(
-                        height: 16,
-                      ),
+                      const SizedBox(height: 16),
                       Row(
                         children: [
-                          Container(
-                            height: 48,
-                            width: 48,
-                            margin: const EdgeInsets.only(right: 16),
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Colors.orange,
-                                width: 3,
-                              ),
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                "5",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            height: 48,
-                            width: 48,
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.orange,
-                                  width: 3,
-                                ),
-                                borderRadius: BorderRadius.circular(6)),
-                            child: const Center(
-                              child: Text(
-                                "6",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const Spacer(),
-                          Container(
-                            margin: const EdgeInsets.only(right: 16),
-                            height: 48,
-                            width: 48,
-                            decoration: BoxDecoration(
-                              color: Colors.grey[400]!,
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            child: const Center(
-                              child: Icon(
-                                Icons.clear,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            height: 48,
-                            width: 48,
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.orange,
-                                  width: 3,
-                                ),
-                                borderRadius: BorderRadius.circular(6)),
-                            child: const Center(
-                              child: Text(
-                                "8",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          )
+                          _buildSeat("5", Colors.red),
+                          _buildSeat("6", Colors.red),
+                          Spacer(),
+                          _buildSeat("7", Colors.red),
+                          _buildSeat("8", Colors.red),
                         ],
                       ),
-                      const SizedBox(
-                        height: 16,
-                      ),
+                      const SizedBox(height: 16),
                       Row(
                         children: [
-                          Container(
-                            height: 48,
-                            width: 96 + 12,
-                            decoration: BoxDecoration(
-                              color: Colors.grey[400],
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                "Table",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const Spacer(),
-                          Container(
-                            height: 48,
-                            width: 96 + 12,
-                            decoration: BoxDecoration(
-                              color: Colors.grey[400],
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                "Table",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                          )
+                          _buildSeat("9", Colors.red),
+                          _buildSeat("10", Colors.red),
+                          Spacer(),
+                          _buildSeat("11", Colors.red),
+                          _buildSeat("12", Colors.red),
                         ],
                       ),
-                      const SizedBox(
-                        height: 16,
-                      ),
+                      const SizedBox(height: 16),
                       Row(
                         children: [
-                          Container(
-                            height: 48,
-                            width: 48,
-                            margin: const EdgeInsets.only(right: 16),
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Colors.orange,
-                                width: 3,
-                              ),
-                              color: Colors.orange,
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                "",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const _GeneralSeatComponent(
-                            borderColor: Colors.orange,
-                            title: "10",
-                          ),
-                          const Spacer(),
-                          Container(
-                            height: 48,
-                            width: 48,
-                            margin: const EdgeInsets.only(right: 16),
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Colors.orange,
-                                width: 3,
-                              ),
-                              // color: Colors.orange,
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                "11",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          ),
-                          _TakenSeatComponent(),
+                          _buildSeat("13", Colors.red),
+                          _buildSeat("14", Colors.red),
+                          Spacer(),
+                          _buildSeat("15", Colors.red),
+                          _buildSeat("16", Colors.red),
                         ],
                       ),
-                      const SizedBox(
-                        height: 16,
-                      ),
+                      const SizedBox(height: 16),
                       Row(
-                        children: const [
-                          _GeneralSeatComponent(
-                            borderColor: Colors.red,
-                            title: "13",
-                            marginRight: 16,
-                          ),
-                          _GeneralSeatComponent(
-                            borderColor: Colors.red,
-                            title: "14",
-                            marginRight: 0,
-                          ),
+                        children: [
+                          _buildSeat("17", Colors.red),
+                          _buildSeat("18", Colors.red),
                           Spacer(),
-                          _TakenSeatComponent(
-                            marginRight: 16,
-                          ),
-                          _TakenSeatComponent(),
+                          _buildSeat("19", Colors.red),
+                          _buildSeat("20", Colors.red),
                         ],
                       ),
-                      const SizedBox(
-                        height: 16,
-                      ),
+                      const SizedBox(height: 16),
                       Row(
-                        children: const [
-                          _GeneralSeatComponent(
-                            borderColor: Colors.red,
-                            title: "17",
-                            marginRight: 16,
-                          ),
-                          _TakenSeatComponent(),
+                        children: [
+                          _buildSeat("21", Colors.red),
+                          _buildSeat("22", Colors.red),
                           Spacer(),
-                          _GeneralSeatComponent(
-                            borderColor: Colors.red,
-                            title: "19",
-                            marginRight: 16,
-                          ),
-                          _GeneralSeatComponent(
-                            borderColor: Colors.red,
-                            title: "20",
-                          ),
+                          _buildSeat("23", Colors.red),
+                          _buildSeat("24", Colors.red),
                         ],
                       ),
-                      const SizedBox(
-                        height: 16,
-                      ),
+                      const SizedBox(height: 16),
                       Row(
-                        children: const [
-                          _TakenSeatComponent(
-                            marginRight: 16,
-                          ),
-                          _GeneralSeatComponent(
-                            borderColor: Colors.red,
-                            title: "22",
-                            marginRight: 0,
-                          ),
+                        children: [
+                          _buildSeat("25", Colors.red),
+                          _buildSeat("26", Colors.red),
                           Spacer(),
-                          _TakenSeatComponent(
-                            marginRight: 16,
-                          ),
-                          _TakenSeatComponent(
-                            marginRight: 0,
-                          ),
+                          _buildSeat("27", Colors.red),
+                          _buildSeat("28", Colors.red),
                         ],
                       ),
-                      const SizedBox(
-                        height: 16,
-                      ),
+                      const SizedBox(height: 16),
                       Row(
-                        children: const [
-                          _TakenSeatComponent(
-                            marginRight: 16,
-                          ),
-                          _TakenSeatComponent(
-                            marginRight: 0,
-                          ),
+                        children: [
+                          _buildSeat("29", Colors.red),
+                          _buildSeat("30", Colors.red),
                           Spacer(),
-                          _GeneralSeatComponent(
-                            borderColor: Colors.red,
-                            title: "27",
-                            marginRight: 16,
-                          ),
-                          _GeneralSeatComponent(
-                            borderColor: Colors.red,
-                            title: "28",
-                            marginRight: 0,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      Row(
-                        children: const [
-                          _GeneralSeatComponent(
-                            borderColor: Colors.red,
-                            title: "29",
-                            marginRight: 16,
-                          ),
-                          _GeneralSeatComponent(
-                            borderColor: Colors.red,
-                            title: "30",
-                            marginRight: 0,
-                          ),
-                          Spacer(),
-                          _GeneralSeatComponent(
-                            borderColor: Colors.red,
-                            title: "31",
-                            marginRight: 16,
-                          ),
-                          _TakenSeatComponent(
-                            marginRight: 0,
-                          ),
+                          _buildSeat("31", Colors.red),
+                          _buildSeat("32", Colors.red),
                         ],
                       ),
                     ],
@@ -504,38 +304,85 @@ class _SelectPageState extends State<SelectPage> {
             ),
             child: Row(
               children: [
-                const Text(
-                  "Seat: 1/1",
-                  style: TextStyle(
+                Text(
+                  "Seat: ${_selectedSeat ?? 'None'}",
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
                   ),
                 ),
-                const SizedBox(
-                  width: 24,
-                ),
+                const SizedBox(width: 24),
                 Expanded(
-                  child: Container(
-                    height: 54,
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(32),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        "Confirm",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                  child: GestureDetector(
+                    onTap: () {
+                      if (_selectedSeat != null) {
+                        _showConfirmationForm(); // Handle confirmation action
+                      }
+                    },
+                    child: Container(
+                      height: 54,
+                      decoration: BoxDecoration(
+                        color: _selectedSeat != null ? Colors.red : Colors.grey,
+                        borderRadius: BorderRadius.circular(32),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          "Confirm",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSeat(String seatNumber, Color borderColor,
+      {bool taken = false}) {
+    return GestureDetector(
+      onTap: taken
+          ? null
+          : () {
+              _onSeatTap(seatNumber);
+            },
+      child: Container(
+        height: 48,
+        width: 48,
+        margin: const EdgeInsets.only(right: 16),
+        decoration: BoxDecoration(
+          border: taken
+              ? null
+              : Border.all(
+                  color: borderColor,
+                  width: 3,
+                ),
+          color: taken
+              ? Colors.grey[400]
+              : (_selectedSeat == seatNumber ? Colors.green : Colors.white),
+          borderRadius: BorderRadius.circular(6),
+        ),
+        child: Center(
+          child: taken
+              ? const Icon(
+                  Icons.clear,
+                  color: Colors.white,
+                )
+              : Text(
+                  seatNumber,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
         ),
       ),
     );
@@ -562,6 +409,7 @@ class _TakenSeatComponent extends StatelessWidget {
       child: const Center(
         child: Icon(
           Icons.clear,
+          color: Colors.white,
         ),
       ),
     );

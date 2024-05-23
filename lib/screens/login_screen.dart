@@ -18,12 +18,10 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
   bool _rememberMe = false;
 
-  // Metode untuk memeriksa apakah email valid
   bool _isEmailValid(String email) {
     return email.contains('@') && email.contains('.com');
   }
 
-  // Metode untuk memeriksa apakah password valid (minimal 8 karakter)
   bool _isPasswordValid(String password) {
     return password.length >= 8;
   }
@@ -49,6 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 const Upside(
                   imgUrl: "assets/images/bus-2.png",
+                  text: "Blue Bus",
                 ),
                 const PageTitleBar(title: 'Login to your account'),
                 Padding(
@@ -98,9 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     // Navigasi jika valid
                                     Navigator.pushReplacement(
                                       context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>  TiketBooking(),
-                                      ),
+                                      MaterialPageRoute(builder: (context) =>  TiketBooking()),
                                     );
                                   } else {
                                     // Tampilkan pesan kesalahan jika tidak valid
