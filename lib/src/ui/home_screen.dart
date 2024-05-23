@@ -15,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _counter = 1;
   String? _selectedFromValue;
   String? _selectedToValue;
-  final List<String> _dropdownItems = ['Jember', 'Banyuwangi', 'Bali'];
+  final List<String> _dropdownItems = ['Jember',  'Bali'];
   final TextEditingController _dateController = TextEditingController();
   DateTime? _selectedDate;
 
@@ -257,28 +257,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ],
-            ),
-          ),
-          Positioned(
-            right: 16,
-            bottom: 16,
-            top: 16,
-            child: GestureDetector(
-              onTap: () {
-                final tmpText = selectedValue;
-                selectedValue = selectedValue == _selectedFromValue
-                    ? _selectedToValue
-                    : _selectedFromValue;
-                onChanged(selectedValue);
-              },
-              child: const Center(
-                child: CircleAvatar(
-                  radius: 32,
-                  backgroundColor: Colors.red,
-                  foregroundColor: Colors.white,
-                  child: Icon(Icons.sync),
-                ),
-              ),
             ),
           ),
         ],
