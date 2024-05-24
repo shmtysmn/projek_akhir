@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            _buildLocationDropdown("From", _selectedFromValue, (String? newValue) {
+            _buildLocationDropdown("", _selectedFromValue, (String? newValue) {
               setState(() {
                 _selectedFromValue = newValue;
               });
@@ -156,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 48),
+            const SizedBox(height: 30),
             GestureDetector(
               onTap: () {
                 context.push("/detail");
@@ -164,9 +164,9 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.red,
-                  borderRadius: BorderRadius.circular(48),
+                  borderRadius: BorderRadius.circular(32),
                 ),
-                padding: const EdgeInsets.symmetric(vertical: 24),
+                padding: const EdgeInsets.symmetric(vertical: 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
@@ -176,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     SizedBox(width: 12),
                     Text(
-                      "Search for Trips",
+                      "Cari",
                       style: TextStyle(
                         fontSize: 18,
                         color: Colors.white,
@@ -231,10 +231,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           isExpanded: true,
                           value: selectedValue,
                           hint: const Text(
-                            "Select an option",
+                            "Tujuan",
                             style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              fontWeight: FontWeight.normal,
                             ),
                           ),
                           items: _dropdownItems.map((String value) {
@@ -243,14 +243,15 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Text(
                                 value,
                                 style: const TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.normal,
                                 ),
                               ),
                             );
                           }).toList(),
                           onChanged: onChanged,
-                          underline: Container(), // Removes the default underline
+                          underline:
+                              Container(), // Removes the default underline
                         ),
                       ),
                     ],
@@ -266,7 +267,9 @@ class _HomeScreenState extends State<HomeScreen> {
             child: GestureDetector(
               onTap: () {
                 final tmpText = selectedValue;
-                selectedValue = selectedValue == _selectedFromValue ? _selectedToValue : _selectedFromValue;
+                selectedValue = selectedValue == _selectedFromValue
+                    ? _selectedToValue
+                    : _selectedFromValue;
                 onChanged(selectedValue);
               },
               child: const Center(

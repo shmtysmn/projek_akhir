@@ -20,7 +20,8 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _rememberMe = false;
 
   bool _isFormValid() {
-    return _emailController.text.isNotEmpty && _passwordController.text.isNotEmpty;
+    return _emailController.text.isNotEmpty &&
+        _passwordController.text.isNotEmpty;
   }
 
   @override
@@ -36,6 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 const Upside(
                   imgUrl: "assets/images/bus-2.png",
+                  text: "Blue Bus",
                 ),
                 const PageTitleBar(title: 'Login to your account'),
                 Padding(
@@ -85,13 +87,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => TiketBooking(), // Ganti dengan halaman lain yang ingin ditampilkan setelah login berhasil
+                                        builder: (context) =>
+                                            TiketBooking(), // Ganti dengan halaman lain yang ingin ditampilkan setelah login berhasil
                                       ),
                                     );
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
-                                        content: Text('Please enter email and password'),
+                                        content: Text(
+                                            'Please enter email and password'),
                                       ),
                                     );
                                   }
@@ -129,7 +133,6 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
 
   Widget switchListTile() {
     return Padding(
@@ -178,5 +181,3 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-
-

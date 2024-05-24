@@ -32,8 +32,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: Stack(
               children: [
                 const Upside(
-                  imgUrl: "assets/images/bus-2.png",
-                ),
+                    imgUrl: "assets/images/bus-2.png", text: "Blue Buss Anjay"),
                 const PageTitleBar(title: 'Create new account'),
                 Padding(
                   padding: const EdgeInsets.only(top: 320.0),
