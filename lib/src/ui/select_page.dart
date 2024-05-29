@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:projek_akhir/src/ui/tiket_page.dart';
+import 'package:projek_akhir/tiket_booking.dart'; // Import halaman DetailPage
 
 class SelectPage extends StatefulWidget {
   const SelectPage({Key? key}) : super(key: key);
@@ -22,7 +24,13 @@ class _SelectPageState extends State<SelectPage> {
     });
   }
 
-  void _showConfirmationForm() {
+  void _navigateToPage(BuildContext context) {
+    // Ubah bagian ini sesuai dengan navigasi yang diinginkan
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => TripTicketPage()));
+  }
+
+  void _showConfirmationForm(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -107,6 +115,8 @@ class _SelectPageState extends State<SelectPage> {
             ElevatedButton(
               onPressed: () {
                 // Handle the form submission
+                // Navigasi ke halaman TiketPage setelah submit
+                _navigateToPage(context);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,
@@ -316,7 +326,8 @@ class _SelectPageState extends State<SelectPage> {
                   child: GestureDetector(
                     onTap: () {
                       if (_selectedSeat != null) {
-                        _showConfirmationForm(); // Handle confirmation action
+                        _showConfirmationForm(
+                            context); // Handle confirmation action
                       }
                     },
                     child: Container(
@@ -359,12 +370,7 @@ class _SelectPageState extends State<SelectPage> {
         width: 48,
         margin: const EdgeInsets.only(right: 16),
         decoration: BoxDecoration(
-          border: taken
-              ? null
-              : Border.all(
-                  color: borderColor,
-                  width: 3,
-                ),
+          border: taken ? null : Border.all(color: borderColor, width: 3),
           color: taken
               ? Colors.grey[400]
               : (_selectedSeat == seatNumber ? Colors.green : Colors.white),
@@ -383,73 +389,6 @@ class _SelectPageState extends State<SelectPage> {
                     fontSize: 20,
                   ),
                 ),
-        ),
-      ),
-    );
-  }
-}
-
-class _TakenSeatComponent extends StatelessWidget {
-  const _TakenSeatComponent({
-    Key? key,
-    this.marginRight = 0.0,
-  }) : super(key: key);
-  final double? marginRight;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: marginRight ?? 0),
-      height: 48,
-      width: 48,
-      decoration: BoxDecoration(
-        color: Colors.grey[400]!,
-        borderRadius: BorderRadius.circular(6),
-      ),
-      child: const Center(
-        child: Icon(
-          Icons.clear,
-          color: Colors.white,
-        ),
-      ),
-    );
-  }
-}
-
-class _GeneralSeatComponent extends StatelessWidget {
-  final String? title;
-  final Color borderColor;
-  final double? marginRight;
-
-  const _GeneralSeatComponent({
-    Key? key,
-    this.title,
-    this.borderColor = Colors.red,
-    this.marginRight = 0.0,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 48,
-      width: 48,
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: borderColor,
-          width: 3,
-        ),
-        borderRadius: BorderRadius.circular(6),
-      ),
-      margin: EdgeInsets.only(
-        right: marginRight ?? 0,
-      ),
-      child: Center(
-        child: Text(
-          "${title}",
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
         ),
       ),
     );

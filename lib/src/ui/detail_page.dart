@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:projek_akhir/main.dart';
+import 'package:projek_akhir/src/ui/home_screen.dart';
+import 'package:projek_akhir/src/ui/select_page.dart';
 
 class DetailPage extends StatefulWidget {
   const DetailPage({Key? key}) : super(key: key);
@@ -149,7 +151,11 @@ class _DetailPageState extends State<DetailPage> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            context.push("/seat");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SelectPage()),
+                            );
                           },
                           child: Container(
                             decoration: BoxDecoration(

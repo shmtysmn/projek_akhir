@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projek_akhir/main.dart';
@@ -29,36 +28,20 @@ class Upside extends StatelessWidget {
         ),
         Positioned(
           top: 180.0, // Adjust the position of the text
-          left: 160.0,
-          right: 160,
+          left: 152.0,
+          right: 152.0,
 
           child: Text(
             text,
             style: GoogleFonts.lato(
               color: Colors.white,
-              fontSize: 30,
+              fontSize: 25,
               fontWeight: FontWeight.normal,
             ),
             textAlign: TextAlign.center,
           ),
         ),
-        Positioned(
-          top: 10.0,
-          left: 10.0,
-          child: iconButton(context),
-        ),
       ],
     );
   }
-}
-
-iconButton(BuildContext context) {
-  return IconButton(
-    color: Colors.white,
-    iconSize: 28,
-    icon: const Icon(CupertinoIcons.arrow_left),
-    onPressed: () {
-      Navigator.pop(context);
-    },
-  );
 }

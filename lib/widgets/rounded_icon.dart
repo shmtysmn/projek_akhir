@@ -67,7 +67,8 @@ class SocialIconsRow extends StatelessWidget {
         ),
         RoundedIcon(
           imageUrl: "assets/images/google.jpg",
-          url: 'https://myaccount.google.com/?utm_source=sign_in_no_continue&pli=1',
+          url:
+              'https://myaccount.google.com/?utm_source=sign_in_no_continue&pli=1',
         ),
       ],
     );

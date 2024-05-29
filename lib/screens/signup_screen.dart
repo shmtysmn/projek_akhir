@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:projek_akhir/components/under_part.dart';
 import 'package:projek_akhir/components/upside.dart';
 import 'package:projek_akhir/components/page_title_bar.dart';
@@ -15,10 +17,97 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _namaController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _konfirmController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
+  bool _showErrors = false;
+
+  Future<void> _register() async {
+    setState(() {
+      _showErrors = true;
+    });
+
+    if (_formKey.currentState!.validate() &&
+        _passwordController.text == _confirmPasswordController.text) {
+      try {
+        final response = await http.post(
+          Uri.parse('http://192.168.1.19/ApiFlutter2/register.php'),
+          headers: {'Content-Type': 'application/json'},
+          body: json.encode({
+            'name': _nameController.text,
+            'username': _usernameController.text,
+            'password': _passwordController.text,
+          }),
+        );
+
+        final data = json.decode(response.body);
+        if (response.statusCode == 200 &&
+            data['message'] == 'Registrasi berhasil') {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text('Success'),
+                content: Text('Registrasi berhasil!'),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginScreen()),
+                        (Route<dynamic> route) => false,
+                      );
+                    },
+                    child: Text('OK'),
+                  ),
+                ],
+              );
+            },
+          );
+        } else {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text('Error'),
+                content: Text('Registrasi gagal. Silakan coba lagi.'),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('OK'),
+                  ),
+                ],
+              );
+            },
+          );
+        }
+      } catch (e) {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text('Error'),
+              content: Text('Terjadi kesalahan. Silakan coba lagi.'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,26 +152,58 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               fontWeight: FontWeight.w600),
                         ),
                         Form(
+                          key: _formKey,
                           child: Column(
                             children: [
                               RoundedInputField(
                                 hintText: "Username",
-                                icon: Icons.email,
-                                controller: _emailController,
+                                icon: Icons.person,
+                                controller: _nameController,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter your username';
+                                  }
+                                  return null;
+                                },
                               ),
                               RoundedInputField(
                                 hintText: "Email",
-                                icon: Icons.person,
-                                controller: _namaController,
+                                icon: Icons.email,
+                                controller: _usernameController,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter your email';
+                                  } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+')
+                                      .hasMatch(value)) {
+                                    return 'Please enter a valid email address';
+                                  }
+                                  return null;
+                                },
                               ),
                               RoundedPasswordField(
                                 controller: _passwordController,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter your password';
+                                  }
+                                  return null;
+                                },
                               ),
                               RoundedKonfirmPassword(
-                                controller: _konfirmController,
+                                controller: _confirmPasswordController,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please confirm your password';
+                                  }
+                                  return null;
+                                },
                               ),
                               const SizedBox(
                                 height: 10,
+                              ),
+                              ElevatedButton(
+                                onPressed: _register,
+                                child: const Text("Sign Up"),
                               ),
                               UnderPart(
                                 title: "Already have an account?",

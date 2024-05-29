@@ -225,7 +225,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
               ),
               TextFormField(
                 decoration: InputDecoration(labelText: 'Password'),
-                initialValue: _password, // Ganti dengan nilai awal password jika ada
+                initialValue:
+                    _password, // Ganti dengan nilai awal password jika ada
                 obscureText: true, // Untuk menyembunyikan teks password
                 onSaved: (value) => _password = value!,
                 validator: (value) {
@@ -236,7 +237,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   return null;
                 },
               ),
-
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {

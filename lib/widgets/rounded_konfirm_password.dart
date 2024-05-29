@@ -8,6 +8,7 @@ class RoundedKonfirmPassword extends StatefulWidget {
     Key? key,
     required this.controller,
     this.onChanged,
+    required String? Function(dynamic value) validator,
   }) : super(key: key);
 
   @override
