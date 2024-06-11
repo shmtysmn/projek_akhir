@@ -35,7 +35,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         _passwordController.text == _confirmPasswordController.text) {
       try {
         final response = await http.post(
-          Uri.parse('http://192.168.1.19/ApiFlutter2/register.php'),
+          Uri.parse('http://192.168.1.5/ApiFlutter2/register.php'),
           headers: {'Content-Type': 'application/json'},
           body: json.encode({
             'name': _nameController.text,

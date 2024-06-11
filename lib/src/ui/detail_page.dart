@@ -47,17 +47,11 @@ class _DetailPageState extends State<DetailPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.filter_list_outlined,
-                  ),
-                ),
                 const Text(
-                  "Search for Trips",
+                  "Jember - Bali",
                   style: TextStyle(
                     fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.normal,
                   ),
                 )
               ],
@@ -78,12 +72,6 @@ class _DetailPageState extends State<DetailPage> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: const [
-                                Text(
-                                  "jember",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                ),
                                 Padding(
                                   padding: EdgeInsets.symmetric(
                                     vertical: 8,
@@ -97,7 +85,7 @@ class _DetailPageState extends State<DetailPage> {
                                   ),
                                 ),
                                 Text(
-                                  "",
+                                  "Jember",
                                   style: TextStyle(
                                     fontSize: 16,
                                   ),
@@ -107,12 +95,6 @@ class _DetailPageState extends State<DetailPage> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: const [
-                                Text(
-                                  "",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
-                                ),
                                 Padding(
                                   padding: EdgeInsets.symmetric(
                                     vertical: 8,
@@ -126,7 +108,7 @@ class _DetailPageState extends State<DetailPage> {
                                   ),
                                 ),
                                 Text(
-                                  "Banyuwangi",
+                                  "Bali",
                                   style: TextStyle(
                                     fontSize: 16,
                                   ),

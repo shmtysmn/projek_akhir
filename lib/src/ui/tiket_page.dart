@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:projek_akhir/main.dart';
+import 'package:projek_akhir/models/booking_data.dart';
 
 class TripTicketPage extends StatelessWidget {
+  final String passengerName;
+  final String seatNumber;
+  final String busType;
+
+  TripTicketPage(
+      {required this.passengerName,
+      required this.seatNumber,
+      required this.busType});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +46,7 @@ class TripTicketPage extends StatelessWidget {
                     ),
                     SizedBox(height: 8),
                     Text(
-                      'Total \$49,00',
+                      'Total 30.000',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 12,
@@ -82,13 +92,14 @@ class TripTicketPage extends StatelessWidget {
                             'assets/images/gol_logo.png',
                           ),
                         ),
-                        SizedBox(height: 28),
+                        SizedBox(height: 16),
                         Text(
-                          '29 OTC',
+                          "tanggal pemesanan",
                           style: TextStyle(
-                            fontSize: 32,
+                            color: veppoLightGrey,
                           ),
                         ),
+                        Text('27/02/2024'),
                         SizedBox(height: 28),
                         Row(
                           children: [
@@ -96,16 +107,16 @@ class TripTicketPage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'From',
+                                  'Tujuan Awal',
                                   style: TextStyle(color: veppoLightGrey),
                                 ),
-                                Text('Porto Alegre'),
+                                Text('Jember'),
                                 SizedBox(height: 28),
                                 Text(
-                                  'To',
+                                  'Tujuan Akhir',
                                   style: TextStyle(color: veppoLightGrey),
                                 ),
-                                Text('Florianópolis'),
+                                Text(' Bali'),
                               ],
                             ),
                             Spacer(),
@@ -113,13 +124,13 @@ class TripTicketPage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Depart',
+                                  'Berangkat',
                                   style: TextStyle(color: veppoLightGrey),
                                 ),
                                 Text('6:30'),
                                 SizedBox(height: 28),
                                 Text(
-                                  'Arrive',
+                                  'Sampai',
                                   style: TextStyle(color: veppoLightGrey),
                                 ),
                                 Text('11:30'),
@@ -140,11 +151,11 @@ class TripTicketPage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Passenger',
+                                  'Nama penumpang',
                                   style: TextStyle(color: veppoLightGrey),
                                 ),
                                 Text(
-                                  'Jane Doe',
+                                  passengerName,
                                   style: TextStyle(
                                     fontSize: 18,
                                   ),
@@ -161,11 +172,11 @@ class TripTicketPage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Gate',
+                                  'Tipe Bus',
                                   style: TextStyle(color: veppoLightGrey),
                                 ),
                                 Text(
-                                  '2H',
+                                  busType,
                                   style: TextStyle(fontSize: 18),
                                 ),
                               ],
@@ -175,11 +186,11 @@ class TripTicketPage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Seat',
+                                  'No Kursi',
                                   style: TextStyle(color: veppoLightGrey),
                                 ),
                                 Text(
-                                  '11B',
+                                  seatNumber,
                                   style: TextStyle(fontSize: 18),
                                 ),
                               ],

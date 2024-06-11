@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:go_router/go_router.dart';
 import 'package:projek_akhir/src/ui/tiket_page.dart';
-import 'package:projek_akhir/tiket_booking.dart'; // Import halaman DetailPage
+import 'package:projek_akhir/models/booking_data.dart';
 
 class SelectPage extends StatefulWidget {
   const SelectPage({Key? key}) : super(key: key);
@@ -12,7 +14,10 @@ class SelectPage extends StatefulWidget {
 
 class _SelectPageState extends State<SelectPage> {
   String? _selectedSeat;
-  String? _paymentMethod;
+  String? _tipeBus;
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _nikController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
 
   void _onSeatTap(String seatNumber) {
     setState(() {
@@ -24,11 +29,36 @@ class _SelectPageState extends State<SelectPage> {
     });
   }
 
-  void _navigateToPage(BuildContext context) {
-    // Ubah bagian ini sesuai dengan navigasi yang diinginkan
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => TripTicketPage()));
+  void _showBookingSuccessNotification(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Pemesanan berhasil'),
+        duration: Duration(
+            seconds: 2), // Sesuaikan durasi notifikasi sesuai kebutuhan
+      ),
+    );
   }
+
+  /* void _navigateToPage(BuildContext context) {
+    // Ubah bagian ini sesuai dengan navigasi yang diinginkan
+    Map<String, String> bookingData = {
+      'passengerName': _nameController.text,
+      'seatNumber': _selectedSeat!,
+      'busType': _tipeBus!,
+    };
+
+    BookingData.instance.addBooking(bookingData);
+
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => TripTicketPage(
+          passengerName: _nameController.text,
+          seatNumber: _selectedSeat!,
+          busType: _tipeBus!,
+        ),
+      ),
+    );
+  } */
 
   void _showConfirmationForm(BuildContext context) {
     showDialog(
@@ -43,6 +73,7 @@ class _SelectPageState extends State<SelectPage> {
               children: [
                 const SizedBox(height: 16),
                 TextField(
+                  controller: _nameController,
                   decoration: const InputDecoration(
                     labelText: 'Nama',
                     border: OutlineInputBorder(),
@@ -50,6 +81,7 @@ class _SelectPageState extends State<SelectPage> {
                 ),
                 const SizedBox(height: 16),
                 TextField(
+                  controller: _nikController,
                   decoration: const InputDecoration(
                     labelText: 'NIK',
                     border: OutlineInputBorder(),
@@ -57,50 +89,39 @@ class _SelectPageState extends State<SelectPage> {
                 ),
                 const SizedBox(height: 16),
                 TextField(
+                  controller: _phoneController,
                   decoration: const InputDecoration(
                     labelText: 'No telpon',
                     border: OutlineInputBorder(),
                   ),
                 ),
                 const SizedBox(height: 16),
-                TextField(
-                  decoration: const InputDecoration(
-                    labelText: 'Alamat',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                const SizedBox(height: 16),
                 Text(
-                  'Payment Details:',
+                  'Pilih Tipe Bus:',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 16),
                 DropdownButtonFormField<String>(
                   decoration: InputDecoration(
-                    labelText: 'Metode Pembayaran',
+                    labelText: 'Tipe Bus',
                     border: OutlineInputBorder(),
                   ),
-                  value: _paymentMethod,
+                  value: _tipeBus,
                   onChanged: (newValue) {
                     setState(() {
-                      _paymentMethod = newValue!;
+                      _tipeBus = newValue!;
                     });
                   },
-                  items: ['Cash', 'kartu kredit', 'Transfer Bank']
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                ),
-                const SizedBox(height: 16),
-                TextField(
-                  decoration: const InputDecoration(
-                    labelText: 'Total Pembayaran',
-                    border: OutlineInputBorder(),
-                  ),
-                  keyboardType: TextInputType.number,
+                  items: [
+                    DropdownMenuItem(
+                      value: 'Merah',
+                      child: Text('Merah'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'putih',
+                      child: Text('putih'),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -110,30 +131,48 @@ class _SelectPageState extends State<SelectPage> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text('Cancel'),
+              child: Text('Batal'),
             ),
             ElevatedButton(
               onPressed: () {
-                // Handle the form submission
-                // Navigasi ke halaman TiketPage setelah submit
-                _navigateToPage(context);
+                Navigator.of(context).pop();
+                _submitBooking();
               },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-              ),
-              child: const Text(
-                "Submit",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
+              child: Text(
+                'Konfirmasi',
               ),
             ),
           ],
         );
       },
     );
+  }
+
+  void _submitBooking() async {
+    final bookingData = {
+      'passengerName': _nameController.text,
+      'seatNumber': _selectedSeat,
+      'busType': _tipeBus,
+    };
+
+    final response = await http.post(
+      Uri.parse('http://192.168.1.5/ApiFlutter2/pemesanan.php'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(bookingData),
+    );
+
+    if (response.statusCode == 200) {
+      final responseBody = jsonDecode(response.body);
+      if (responseBody['message'] == 'Pemesanan berhasil disimpan') {
+        _showBookingSuccessNotification(
+            context); // Menampilkan notifikasi pemesanan berhasil
+        Navigator.pop(context); // Kembali ke halaman awal
+      } else {
+        print('Error: ${responseBody['message']}');
+      }
+    } else {
+      print('Error: ${response.statusCode}');
+    }
   }
 
   @override

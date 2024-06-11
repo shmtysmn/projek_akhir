@@ -38,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
       // Null-safe check for _formKey.currentState
       try {
         final response = await http.post(
-          Uri.parse('http://192.168.1.19/ApiFlutter2/login.php'),
+          Uri.parse('http://192.168.1.5/ApiFlutter2/login.php'),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode(<String, String>{
             'username': _emailController.text,

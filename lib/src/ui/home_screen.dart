@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:projek_akhir/main.dart';
+import 'package:projek_akhir/models/booking_data.dart';
 import 'package:projek_akhir/src/ui/booking_main.dart';
 import 'package:projek_akhir/src/ui/detail_page.dart';
 import 'package:go_router/src/route.dart';
@@ -153,62 +155,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
-              const SizedBox(height: 32),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    "Jumlah",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  Container(
-                    height: 42,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(32),
-                      border: Border.all(
-                        color: Colors.red,
-                        width: 1.5,
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            if (_counter > 0) {
-                              setState(() {
-                                _counter--;
-                              });
-                            }
-                          },
-                          icon: Icon(
-                            Icons.remove,
-                            color: _counter == 0 ? Colors.grey : Colors.black,
-                          ),
-                        ),
-                        Text(
-                          "$_counter",
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _counter++;
-                            });
-                          },
-                          icon: const Icon(Icons.add),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
 
               const SizedBox(height: 30),
               GestureDetector(
@@ -218,7 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.red,
+                    color: veppoBlue,
                     borderRadius: BorderRadius.circular(32),
                   ),
                   padding: const EdgeInsets.symmetric(vertical: 16),
